@@ -28,6 +28,7 @@ class FallbackController {
     static async addFallback(req, res) {
         try {
             const collection = new Collection();
+            collection.query = req.body.query;
             console.log("Collection: " + collection);
             collection.save();
             return Afterware.sendResponse(req, res, 200, {
