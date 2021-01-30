@@ -54,6 +54,33 @@ class KisanQueryController {
         }
     }
 
+    static async dataFetchAll(req, res) {
+        var regState = new RegExp(req.body.state);
+        try {
+            const collections = await Collection.find({
+                sector: req.body.sector,
+                category: req.body.category,
+                crop: req.body.crop,
+                query_type: req.body.query_type,
+                state: regState,
+                district: req.body.district,
+                response: { $not: /કિસાન કોલ સેન્ટર/ }
+            });
+            return Afterware.sendResponse(req, res, 200, {
+                status: "success",
+                data: collections,
+            });
+
+        } catch (error) {
+            console.log(error);
+            return Afterware.sendResponse(req, res, 500, {
+                status: "error",
+                message: "Internal Server Error",
+            })
+        }
+
+    }
+
     static async getPrice(req, res) {
         try {
             var regex_plant = new RegExp(req.body.plant_name);
