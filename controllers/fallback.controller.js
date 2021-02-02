@@ -43,6 +43,22 @@ class FallbackController {
             })
         }
     }
+    static async delete(req, res) {
+        const id = req.params.id;
+        console.log(id);
+        try {
+            const deleted = await Collection.deleteOne({ _id: id });
+            return Afterware.sendResponse(req, res, 200, {
+                status: deleted.ok == "1" ? "success" : "fail",
+                message: deleted.deletedCount,
+            });
+        } catch (error) {
+            return Afterware.sendResponse(req, res, 500, {
+                status: "error",
+                message: "Internal Server Error",
+            });
+        }
+    }
 }
 
 module.exports = FallbackController;
