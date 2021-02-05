@@ -29,15 +29,14 @@ class KisanQueryController {
 
     static async dataFetch(req, res) {
         var regex_plant = new RegExp(req.body.plant_name);
-        const plant_area = req.body.plant_area;
         var regex_area = new RegExp(req.body.plant_area);
-        const plant_problem = req.body.plant_problem;
         var regex_problem = new RegExp(req.body.plant_problem);
+        console.log(regex_problem + '' + regex_area, +'' + regex_plant);
         try {
             const collections = await Collection.find({
                 sector: { $in: ['ખેત', 'બાગાયત'] },
                 crop: regex_plant,
-                query_text: { $in: [regex_area, regex_problem] },
+                $and: [{ query_text: { $regex: regex_area } }, { query_text: { $regex: regex_problem } }],
                 response: { $not: /કિસાન કોલ સેન્ટર/ }
             });
             return Afterware.sendResponse(req, res, 200, {
@@ -109,7 +108,6 @@ class KisanQueryController {
             const collections = await Collection.find({
                 sector: { $in: ['ખેત', 'બાગાયત'] },
                 crop: regex_plant,
-                query_type: 'ખાતર ઉપયોગ અને ઉપલબ્ધિ',
                 query_text: { $in: [/Gernal/, /ખાતર/, /PGR/] },
                 response: { $not: /કિસાન કોલ સેન્ટર/ }
             });
