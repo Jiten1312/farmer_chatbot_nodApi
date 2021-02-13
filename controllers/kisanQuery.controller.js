@@ -141,6 +141,31 @@ class KisanQueryController {
             })
         }
     }
+
+    static async getPlantNames(req,res) {
+        try {
+            if(req.body.category === "ધાન્ય") {
+                var regex_category = new RegExp("અનાજ");
+            }
+            else {
+                var regex_category = new RegExp(req.body.category);
+            }            
+            const collections = await Collection.distinct("crop",{
+                category: regex_category
+            });
+
+            return Afterware.sendResponse(req, res, 200, {
+                status: "success",
+                data: collections,
+            });
+        } catch (error) {
+            console.log(error);
+            return Afterware.sendResponse(req, res, 500, {
+                status: "error",
+                message: "Internal Server Error",
+            });
+        }
+    }
 }
 
 module.exports = KisanQueryController;
