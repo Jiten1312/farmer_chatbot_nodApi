@@ -181,7 +181,7 @@ class KisanQueryController {
     }
     static async update(req, res) {
         try {
-            const userId = req.params.id;
+            const id = req.params.id;
             if (id && id === "") {
                 return Afterware.sendResponse(req, res, 400, {
                     status: "Validation Error",
