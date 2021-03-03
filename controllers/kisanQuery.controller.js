@@ -128,7 +128,18 @@ class KisanQueryController {
         try {
             const collection = new Collection();
             collection.sector = req.body.sector;
+            collection.category = req.body.category;
+            collection.crop = req.body.crop;
+            collection.query_text = req.body.query_text;
+            collection.query_type = req.body.query_type;
+            collection.response = req.body.response;
+            collection.state = req.body.state;
+            collection.district = req.body.district;
+            collection.block = req.body.block;
+            // console.log(req.body);
+            console.log(collection);
             collection.save();
+            console.log(collection);
             return Afterware.sendResponse(req, res, 200, {
                 status: "success",
                 message: "new Query added created successfully",
