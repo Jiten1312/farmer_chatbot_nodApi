@@ -9,5 +9,6 @@ router.post("/addQuery", KisanQueryController.addQuery);
 router.post("/dataFetchAll", KisanQueryController.dataFetchAll);
 router.post("/getPlantNames", KisanQueryController.getPlantNames);
 router.delete("/delete/:id", KisanQueryController.delete);
+router.put("/update/:id", KisanQueryController.update);
 
 module.exports = router;

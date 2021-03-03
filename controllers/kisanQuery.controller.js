@@ -179,6 +179,29 @@ class KisanQueryController {
             });
         }
     }
+    static async update(req, res) {
+        try {
+            const userId = req.params.id;
+            if (id && id === "") {
+                return Afterware.sendResponse(req, res, 400, {
+                    status: "Validation Error",
+                    message: "Enter Proper userId",
+                });
+            } else {
+                const updated = await Collection.updateOne({ _id: id }, req.body);
+                return Afterware.sendResponse(req, res, 200, {
+                    status: "success",
+                    message: `${updated.nModified} Documents modified`,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            return Afterware.sendResponse(req, res, 500, {
+                status: "error",
+                message: "Internal Server Error",
+            });
+        }
+    }
 }
 
 module.exports = KisanQueryController;
