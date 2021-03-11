@@ -29,7 +29,13 @@ class KisanQueryController {
 
     static async dataFetch(req, res) {
         var regex_plant = new RegExp(req.body.plant_name);
-        var regex_area = new RegExp(req.body.plant_area);
+        var regex_area;
+        if (req.body.plant_area != 'સામાન્ય') {
+            regex_area = new RegExp(req.body.plant_area);
+        } else {
+            regex_area = new RegExp('');
+        }
+
         var regex_problem = new RegExp(req.body.plant_problem);
         console.log(regex_problem + '' + regex_area, +'' + regex_plant);
         try {
