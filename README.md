@@ -1,6 +1,6 @@
 # farmer_chatbot_nodApi(NodeJS)
-# front-end: https://github.com/Jiten1312/farmer_chatbot_flutterApp
-# Rasa: https://github.com/AdilOtha/rasa-chatbot
+## front-end: https://github.com/Jiten1312/farmer_chatbot_flutterApp
+## Rasa: https://github.com/AdilOtha/rasa-chatbot
 
 #Create config folder inside root of the project.
 #cd config
